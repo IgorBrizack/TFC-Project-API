@@ -1,0 +1,25 @@
+
+
+npm run compose:up:dev
+npm run db:reset
+
+Seu projeto vai conter um arquivo docker-compose.yml que será utilizado pelo avaliador para realizar o build da aplicação, você não deve alterá-lo ou excluí-lo.
+
+O arquivo docker-compose.yml também pode ser utilizado para executar a aplicação na sua máquina local, para isso é necessário executar o comando npm run compose:up na raiz do projeto.
+
+Recomendamos que enquanto desenvolve o projeto prefira o usar o comando npm run compose:up:dev pois, diferente do comando anterior, este comando está configurado para compartilhar volumes com o docker e também utiliza o script que realiza o live-reload ao fazer modificações no back-end. Somente quando instalar uma nova dependência ou alterar algum arquivo na raiz do backend, você deverá realizar o re-build do seu compose, pois o volume está mapeando somente alterações dentro da pasta src Você pode verificar essas configurações explorando o arquivo docker-compose.dev.yml e comparar com docker-compose.yml
+/////////////////////
+
+Considerando o uso do parâmetro healthcheck em cada container do seu docker-compose.yml, a inicialização dos containers deve aguardar o comando de status de saúde (o que valida se aquele container está operacional ou não):
+
+No container db, representado por um comando ping no banco de dados;
+No back-end, representado por um comando lsof, que vai procurar aplicações ativas na porta definida (por padrão, no caso 3001);
+No front-end, representado por um comando lsof, que vai procurar aplicações ativas na porta definida (por padrão, no caso 3000).
+
+////////////////////////////
+
+Os testes vão utilizar a sua aplicação do compose para fazer as validações, portanto é essencial que ela esteja funcionando corretamente para que os testes passem!
+
+Para isso, garanta que as aplicações, tanto do back, quanto do front-end, possuem arquivos Dockerfile válidos;
+Utilize os scripts de apoio npm run compose:up / npm run compose:down, para facilitar a execução do seu compose.
+
