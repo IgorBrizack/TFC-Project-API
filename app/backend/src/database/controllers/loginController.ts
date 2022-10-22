@@ -8,7 +8,7 @@ export default class LoginController {
     // login route
     const { email, password } = req.body;
     const userDataDetail = await this.userService.login({ email, password });
-    if (!userDataDetail) return res.status(404).json({ message: 'User not found' });
-    res.status(201).json({ token: userDataDetail });
+    if (!userDataDetail) return res.status(401).json({ message: 'Incorrect email or password' });
+    res.status(200).json({ token: userDataDetail });
   };
 }

@@ -1,8 +1,12 @@
 import Joi = require('joi');
 
 const schema1 = Joi.object({
-  username: Joi.string().required(),
-  password: Joi.string().required().min(6),
+  email: Joi.string().required().messages({
+    'any.required': 'All fields must be filled',
+  }),
+  password: Joi.string().required().min(6).messages({
+    'any.required': 'All fields must be filled',
+  }),
 });
 
 const schema = { schema1 };

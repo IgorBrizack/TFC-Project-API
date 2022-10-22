@@ -6,6 +6,6 @@ const router = Router();
 
 const loginController = new LoginController();
 
-router.get('/', loginMiddlware, loginController.login);
+router.post('/', loginMiddlware, loginController.login);
 
 export default router;

@@ -29,6 +29,10 @@ Users.init({
     type: STRING,
     allowNull: false,
   },
+  password: {
+    type: STRING,
+    allowNull: false,
+  },
 }, {
   underscored: true,
   sequelize: db,
