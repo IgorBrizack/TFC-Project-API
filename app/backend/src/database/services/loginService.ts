@@ -1,5 +1,5 @@
 // import ILogin from 'src/interfaces/loginInterface';
-import ILogin from 'src/interfaces/loginInterface';
+import ILogin from '../../interfaces/loginInterface';
 import Users from '../models/Users';
 
 export default class LoginService {
@@ -7,10 +7,12 @@ export default class LoginService {
 
   public async login(login:ILogin): Promise<boolean> {
     const { email, password } = login;
-    const hasUser = await this.model.findAll({ where: { email } });
+    const hasUser = await this.model.findOne({ where: { email, password } });
+
+    console.log(hasUser);
 
     if (!hasUser) {
-      await this.model.create({ email, password });
+      // await this.model.create({ email, password });
       return true;
     }
     return false;
