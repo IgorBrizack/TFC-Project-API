@@ -4,7 +4,7 @@ import * as chai from 'chai';
 import chaiHttp = require('chai-http');
 
 import { app } from '../app';
-import Example from '../database/models/ExampleModel';
+import Login from '../database/models/';
 
 import { Response } from 'superagent';
 
@@ -12,7 +12,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 
-describe('Seu teste', () => {
+describe('Testando a rota de Login', () => {
   /**
    * Exemplo do uso de stubs com tipos
    */
@@ -39,7 +39,8 @@ describe('Seu teste', () => {
   //   expect(...)
   // });
 
-  it('Seu sub-teste', () => {
+  it('Deve retornar um Token ao ser passado um login e senha válidos e status 200', async () => {
+    const httpResponse = await chai.request()
     expect(false).to.be.eq(true);
   });
 });
