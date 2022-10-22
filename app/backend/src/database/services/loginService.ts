@@ -11,8 +11,6 @@ export default class LoginService {
     const { email, password } = login;
     const hasUser = await this.model.findOne({ where: { email } });
 
-    console.log(hasUser);
-
     if (hasUser && await crypto
       .compare(password, hasUser?.getDataValue('password') as string)) return generateToken(email);
 
@@ -21,7 +19,6 @@ export default class LoginService {
 
   public async loginValidate(email: string): Promise<string> {
     const userRole = await this.model.findOne({ where: { email } });
-    console.log(userRole);
     return userRole?.getDataValue('role');
   }
 }
