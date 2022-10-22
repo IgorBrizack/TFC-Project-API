@@ -19,7 +19,9 @@ export default class LoginService {
     return false;
   }
 
-  // public async loginValidate(email: string): Promise<string> {
-  //   const userRole = await this.model.findOne({ where: { email } });
-  // }
+  public async loginValidate(email: string): Promise<string> {
+    const userRole = await this.model.findOne({ where: { email } });
+    console.log(userRole);
+    return userRole?.getDataValue('role');
+  }
 }
