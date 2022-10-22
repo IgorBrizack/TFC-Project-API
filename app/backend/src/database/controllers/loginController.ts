@@ -12,8 +12,9 @@ export default class LoginController {
     res.status(200).json({ token: userDataDetail });
   };
 
-  public validate = async (req: Request, res: Response) => {
-    console.log(req.user);
-    res.sendStatus(200);
-  };
+  // public validate = async (req: Request, res: Response) => {
+  //   const { payload: { data: email } } = req.body;
+  //   const role = await this.userService.loginValidate(email);
+  //   res.status(200).json({ message: role });
+  // };
 }

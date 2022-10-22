@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
+import 'dotenv/config';
 
-import jwt = require('jsonwebtoken');
+import * as jwt from 'jsonwebtoken';
 
-const secret = process.env.JWT_SECRET || 'suaSenhaSecreta';
+const secret = process.env.JWT_SECRET || 'jwt_secret';
 
 const validateToken = (req:Request, res: Response, next: NextFunction) => {
   const { headers: { authorization } } = req;
@@ -15,7 +16,7 @@ const validateToken = (req:Request, res: Response, next: NextFunction) => {
 
   try {
     const payload = jwt.verify(authorization, secret);
-    req.user = payload as string;
+    req.body = { payload };
     return next();
   } catch (error) {
     return res.status(401).json({
