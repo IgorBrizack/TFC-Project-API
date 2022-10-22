@@ -11,4 +11,9 @@ export default class LoginController {
     if (!userDataDetail) return res.status(401).json({ message: 'Incorrect email or password' });
     res.status(200).json({ token: userDataDetail });
   };
+
+  public validate = async (req: Request, res: Response) => {
+    console.log(req.user);
+    res.sendStatus(200);
+  };
 }
