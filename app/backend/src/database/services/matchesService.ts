@@ -34,4 +34,8 @@ export default class MatchesService {
     const newMatchInsert = await this.model.create({ ...match, inProgress: true });
     return newMatchInsert;
   }
+
+  public async finishMatch(id: number): Promise<void> {
+    await this.model.update({ inProgress: false }, { where: { id } });
+  }
 }
