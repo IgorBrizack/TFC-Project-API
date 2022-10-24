@@ -18,4 +18,15 @@ export default class MatchesController {
       .matchesService.matchesInProgress(key);
     return res.status(200).json(allMatchesInProgress);
   };
+
+  public insertMatch = async (req: Request, res: Response) => {
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
+
+    const newMatchInserted = await this.matchesService.insertNewMatch({
+      homeTeam, awayTeam, homeTeamGoals, awayTeamGoals,
+    });
+
+    console.log(newMatchInserted);
+    res.status(201).json(newMatchInserted);
+  };
 }

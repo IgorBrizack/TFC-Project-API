@@ -16,7 +16,7 @@ const validateToken = (req:Request, res: Response, next: NextFunction) => {
 
   try {
     const payload = jwt.verify(authorization, secret);
-    req.body = { payload };
+    req.body = { payload, ...req.body };
     return next();
   } catch (error) {
     return res.status(401).json({

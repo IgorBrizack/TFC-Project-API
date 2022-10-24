@@ -1,4 +1,4 @@
-// import IMatches from '../../interfaces/matchesInterface';
+import INewMatch from '../../interfaces/newMatchInterface';
 import Matches from '../models/Matches';
 import Teams from '../models/Teams';
 
@@ -28,5 +28,10 @@ export default class MatchesService {
         attributes: { exclude: ['id'] } }],
     });
     return matchesInProgressData;
+  }
+
+  public async insertNewMatch(match:INewMatch): Promise<Matches> {
+    const newMatchInsert = await this.model.create({ ...match, inProgress: true });
+    return newMatchInsert;
   }
 }
