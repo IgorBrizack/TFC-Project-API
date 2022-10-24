@@ -9,6 +9,7 @@ const router = Router();
 const matchesController = new MatchesController();
 
 router.patch('/:id/finish', matchesController.updateMatch);
+router.patch('/:id', matchesController.updateTeamScore);
 router.get('/', matchesController.bringAllMatches);
 router.post(
   '/',
