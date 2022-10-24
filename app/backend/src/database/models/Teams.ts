@@ -1,6 +1,5 @@
 import { Model, INTEGER, STRING } from 'sequelize';
 import db from '.';
-// import Matches from './Matches';
 // import OtherModel from './OtherModel';
 
 class Teams extends Model {
@@ -35,7 +34,5 @@ Teams.init({
 // OtherModel.belongsTo(Example, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
 
 // JÁ TA PREENCHIDO
-// Teams.belongsTo(Matches, { foreignKey: 'homeTeam', as: 'home_team1' });
-// Teams.belongsTo(Matches, { foreignKey: 'awayTeam', as: 'away_team1' });
 
 export default Teams;
