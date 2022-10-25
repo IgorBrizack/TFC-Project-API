@@ -1,11 +1,9 @@
-import ITeam from "../../interfaces/teamsInterface";
-
-export const oneTeam:ITeam = {
+export const oneTeam = {
   id: 2,
   teamName: "Bahia"
 }
 
-export const allTeams:ITeam[] = [
+export const allTeams = [
   {
     id: 1,
     teamName: "Avaí/Kindermann"

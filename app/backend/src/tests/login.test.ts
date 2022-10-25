@@ -58,7 +58,6 @@ describe('Testando a rota de Login', () => {
   });
 
   it('Deve retornar a role do usuário, caso seja passado um usuário e senhas válidos', async () => {
-    // sinon.stub(generateToken,'default').resolves(TOKEN)
     const httpResponseLogin = await chai.request(app).
     post('/login')
     .send({email: 'admin@admin.com', password: 'secret_admin'})
@@ -68,35 +67,5 @@ describe('Testando a rota de Login', () => {
     .send().set('Authorization', httpResponseLogin.body.token)
     expect(httpResponse.status).to.be.equal(200);
     expect(httpResponse.body).to.deep.equal({role: 'admin'})
-
-    // sinon.restore()
   });
 });
-
-
-
-/**
-   * Exemplo do uso de stubs com tipos
-   */
-
-  // let chaiHttpResponse: Response;
-
-  // before(async () => {
-  //   sinon
-  //     .stub(Example, "findOne")
-  //     .resolves({
-  //       ...<Seu mock>
-  //     } as Example);
-  // });
-
-  // after(()=>{
-  //   (Example.findOne as sinon.SinonStub).restore();
-  // })
-
-  // it('...', async () => {
-  //   chaiHttpResponse = await chai
-  //      .request(app)
-  //      ...
-
-  //   expect(...)
-  // });
