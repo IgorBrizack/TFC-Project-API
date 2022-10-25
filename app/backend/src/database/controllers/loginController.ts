@@ -5,7 +5,6 @@ export default class LoginController {
   constructor(private userService = new LoginService()) {}
 
   public login = async (req: Request, res: Response) => {
-    // login route
     const { email, password } = req.body;
     const userDataDetail = await this.userService.login({ email, password });
     if (!userDataDetail) return res.status(401).json({ message: 'Incorrect email or password' });
