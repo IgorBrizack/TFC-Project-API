@@ -2,8 +2,9 @@ import * as express from 'express';
 import loginRouter from './routes/login';
 import teamsRouter from './routes/teams';
 import matchesRouter from './routes/matches';
-import leaderBoardRouter from './routes/leaderBoardRouter';
+import homeLeaderBoardRouter from './routes/homeLeaderBoard';
 import awayLeaderBoardRouter from './routes/awayLeaderBoard';
+import leaderBoardRouter from './routes/leaderBoard';
 
 class App {
   public app: express.Express;
@@ -18,8 +19,9 @@ class App {
     this.app.use('/login', loginRouter);
     this.app.use('/teams', teamsRouter);
     this.app.use('/matches', matchesRouter);
-    this.app.use('/leaderboard/home', leaderBoardRouter);
+    this.app.use('/leaderboard/home', homeLeaderBoardRouter);
     this.app.use('/leaderboard/away', awayLeaderBoardRouter);
+    this.app.use('/leaderboard', leaderBoardRouter);
   }
 
   private config():void {
