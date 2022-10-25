@@ -26,7 +26,6 @@ export default class MatchesController {
       homeTeam, awayTeam, homeTeamGoals, awayTeamGoals,
     });
 
-    console.log(newMatchInserted);
     res.status(201).json(newMatchInserted);
   };
 
