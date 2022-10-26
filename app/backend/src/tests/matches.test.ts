@@ -72,6 +72,7 @@ describe('Testando a rota de Matches', () => {
 
     expect(httpResponse.status).to.be.equal(200);
     expect(httpResponse.body).to.deep.equal({message: 'Finished'})
+    sinon.restore()
   });
 
   it('Deve devolver um erro ao inserir uma partida com times iguais', async () => {
@@ -91,16 +92,17 @@ describe('Testando a rota de Matches', () => {
     expect(httpResponse.body).to.deep.equal({message: "It is not possible to create a match with two equal teams"})
   });
 
-  // it('Deve retornar a role do usuário, caso seja passado um usuário e senhas válidos', async () => {
-  //   const httpResponseLogin = await chai.request(app).
-  //   post('/login')
-  //   .send({email: 'admin@admin.com', password: 'secret_admin'})
+  it('Deve ser possível atualizar uma partida em andamento ao passar o id da partida "/matches/:id"', async () => {
+    sinon.stub(Matches,'update').resolves(null as any)
 
-  //   const httpResponse = await chai.request(app).
-  //   get('/login/validate')
-  //   .send().set('Authorization', httpResponseLogin.body.token)
-  //   expect(httpResponse.status).to.be.equal(200);
-  //   expect(httpResponse.body).to.deep.equal({role: 'admin'})
+    const httpResponse = await chai.request(app).
+    patch('/matches/1').send({
+      "homeTeamGoals": 3,
+      "awayTeamGoals": 1
+    })
 
-  // });
+    expect(httpResponse.status).to.be.equal(200)
+    expect(httpResponse.body).to.deep.equal({message: 'Score Updated'})
+    sinon.restore()
+  });
 });
