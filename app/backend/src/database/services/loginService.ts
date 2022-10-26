@@ -12,7 +12,7 @@ export default class LoginService {
     const hasUser = await this.model.findOne({ where: { email } });
 
     if (hasUser && await crypto
-      .compare(password, hasUser?.getDataValue('password') as string)) return generateToken(email);
+      .compare(password, hasUser.getDataValue('password') as string)) return generateToken(email);
 
     return false;
   }

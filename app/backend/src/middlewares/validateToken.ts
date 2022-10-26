@@ -3,7 +3,7 @@ import 'dotenv/config';
 
 import * as jwt from 'jsonwebtoken';
 
-const secret = process.env.JWT_SECRET || 'jwt_secret';
+const secret = process.env.JWT_SECRET;
 
 const validateToken = (req:Request, res: Response, next: NextFunction) => {
   const { headers: { authorization } } = req;
@@ -15,7 +15,7 @@ const validateToken = (req:Request, res: Response, next: NextFunction) => {
   }
 
   try {
-    const payload = jwt.verify(authorization, secret);
+    const payload = jwt.verify(authorization, secret as string);
     req.body = { payload, ...req.body };
     return next();
   } catch (error) {

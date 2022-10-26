@@ -67,5 +67,6 @@ describe('Testando a rota de Login', () => {
     .send().set('Authorization', httpResponseLogin.body.token)
     expect(httpResponse.status).to.be.equal(200);
     expect(httpResponse.body).to.deep.equal({role: 'admin'})
+    sinon.restore()
   });
 });

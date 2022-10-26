@@ -105,4 +105,49 @@ describe('Testando a rota de Matches', () => {
     expect(httpResponse.body).to.deep.equal({message: 'Score Updated'})
     sinon.restore()
   });
+
+  it('Não deve ser possível inserir uma nova partida ao passa um time inexistente', async () => {
+    // sinon.stub(Matches,'create').resolves()
+
+    const httpResponseLogin = await chai.request(app).
+    post('/login')
+    .send({email: 'admin@admin.com', password: 'secret_admin'})
+
+    const httpResponse = await chai.request(app).
+    post('/matches').send({
+      "homeTeam": 99999,
+      "awayTeam": 88888, 
+      "homeTeamGoals": 2,
+      "awayTeamGoals": 2,
+    }).set('Authorization',httpResponseLogin.body.token)
+
+    expect(httpResponse.status).to.be.equal(404);
+    expect(httpResponse.body).to.deep.equal({ message: "There is no team with such id!" })
+  });
+
+  it('Não deve ser possível inserir uma nova partida ao passa um time inexistente', async () => {
+    const httpResponse = await chai.request(app).
+    post('/matches').send({
+      "homeTeam": 99999,
+      "awayTeam": 88888, 
+      "homeTeamGoals": 2,
+      "awayTeamGoals": 2,
+    }).set('Authorization','invalid_token')
+
+    expect(httpResponse.status).to.be.equal(401);
+    expect(httpResponse.body).to.deep.equal({ message: "Token must be a valid token" })
+  });
+
+  it('Não deve ser possível inserir uma nova partida ao não passar um token', async () => {
+    const httpResponse = await chai.request(app).
+    post('/matches').send({
+      "homeTeam": 99999,
+      "awayTeam": 88888, 
+      "homeTeamGoals": 2,
+      "awayTeamGoals": 2,
+    })
+
+    expect(httpResponse.status).to.be.equal(401);
+    expect(httpResponse.body).to.deep.equal({ message: 'Token not found'})
+  });
 });
