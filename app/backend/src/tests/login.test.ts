@@ -5,6 +5,7 @@ import chaiHttp = require('chai-http');
 
 import { app } from '../app';
 import * as generateToken from '../jwt/generateToken';
+import Users from '../database/models/Users';
 
 chai.use(chaiHttp);
 
@@ -67,6 +68,17 @@ describe('Testando a rota de Login', () => {
     .send().set('Authorization', httpResponseLogin.body.token)
     expect(httpResponse.status).to.be.equal(200);
     expect(httpResponse.body).to.deep.equal({role: 'admin'})
+    sinon.restore()
+  });
+
+  it('Deve retornar um status code 404 caso usuário não seja encontrado', async () => {
+    sinon.stub(Users, 'findOne').resolves(null)
+    sinon.stub(generateToken,'default').resolves(TOKEN)
+
+    const httpResponse = await chai.request(app).
+    get('/login/validate')
+    .send().set('Authorization', TOKEN)
+    expect(httpResponse.status).to.be.equal(404);
     sinon.restore()
   });
 });

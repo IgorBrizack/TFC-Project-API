@@ -13,7 +13,11 @@ export default class LoginController {
 
   public validate = async (req: Request, res: Response) => {
     const { payload: { data: { email } } } = req.body;
-    const role = await this.userService.loginValidate(email);
-    res.status(200).json({ role });
+    try {
+      const role = await this.userService.loginValidate(email);
+      res.status(200).json({ role });
+    } catch (error) {
+      res.sendStatus(404);
+    }
   };
 }

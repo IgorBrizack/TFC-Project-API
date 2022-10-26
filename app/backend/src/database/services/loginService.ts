@@ -17,8 +17,11 @@ export default class LoginService {
     return false;
   }
 
-  public async loginValidate(email: string): Promise<string> {
-    const userRole = await this.model.findOne({ where: { email } });
-    return userRole?.getDataValue('role');
+  public async loginValidate(email: string): Promise<any> {
+    const userRole = await this.model.findOne({ where: { email }, raw: true });
+    if (!userRole) {
+      throw new Error('user not found');
+    }
+    return userRole.role;
   }
 }
